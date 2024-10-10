@@ -4,14 +4,23 @@
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https ca-certificates curl
 
+#Addition kube 1.31 repo. If u want to change version, just replace package version in URL string
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
+#Installing Kubernates services
 sudo apt-get update -y
 sudo apt-get install -y kubelet kubeadm kubectl containerd
 sudo apt-mark hold kubelet kubeadm kubectl
 
+#These required ports need to be open in order for Kubernetes components, good idea previously check it.
+nc 127.0.0.1 6443 -v
+#Output must be something like Connection to 127.0.0.1 6443 port [tcp/*] succeeded!
+
+#The default behavior of a kubelet is to fail to start if swap memory is detected on a node.
+sudo swapoff -a
+#But prefer if u disable swap in config file /etc/fstab
 
 # activate specific modules
 # overlay — The overlay module provides overlay filesystem support, which Kubernetes uses for its pod network abstraction
