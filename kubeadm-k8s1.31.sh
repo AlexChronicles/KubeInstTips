@@ -66,6 +66,7 @@ sudo kubeadm init \
   --apiserver-advertise-address=10.128.0.28 \
   --pod-network-cidr 10.244.0.0/16
 
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 
 # set default kubeconfig
 mkdir -p $HOME/.kube
