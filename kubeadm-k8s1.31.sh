@@ -42,7 +42,7 @@ sysctl -p /etc/sysctl.conf
 # https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/
 # https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cgroup-drivers
 sudo mkdir /etc/containerd/
-sudo vim /etc/containerd/config.toml
+sudo nano /etc/containerd/config.toml
 
 version = 2
 [plugins]
