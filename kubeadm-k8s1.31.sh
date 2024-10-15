@@ -85,3 +85,6 @@ sudo kubeadm join 10.128.0.28:6443 --token zvxm7y.z61zq4rzaq3rtipk \
         --discovery-token-ca-cert-hash sha256:9b650e50a7a5b6261746684d033a7d6483ea5b84db8932cb70563b35f91080f7
 
 #Other set of cheatsheets for your reference: https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/
+
+#Optional install Lens for K8s, https://k8slens.dev/
+#Need 2 copy .kube config in lens 2 acces kubernates claster
