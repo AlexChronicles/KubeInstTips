@@ -28,3 +28,34 @@ helm install traefik traefik/traefik --values traefik-values.yaml -n traefik --c
 #traefik with docker.io/traefik:v3.1.6 has been deployed successfully on traefik namespace !
 
 #Next step 2 create PV and PVC for traefik volume
+# tr-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tr-pv
+spec:
+  capacity:
+    storage: 128Mi  # Размер хранилища
+  accessModes:
+    - ReadWriteOnce  # Режим доступа
+  hostPath:
+    path: /mnt/data/trdata  # Путь на узле, где будет храниться данные
+  persistentVolumeReclaimPolicy: Retain  # Политика удержания (можно изменить на Delete при необходимости)
+
+# tr-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tr-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce  # Режим доступа
+  resources:
+    requests:
+      storage: 128Mi  # Запрашиваемый размер
+  storageClassName: ""  # Указываем пустую строку, если используем локальное хранилище
+
+#Apply that
+kubectl apply -f tr-pv.yaml
+kubectl apply -f tr-pvc.yaml
+
