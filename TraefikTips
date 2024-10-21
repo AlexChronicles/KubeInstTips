@@ -12,3 +12,17 @@ ingressRoute:
       kubernetes.io/ingress.class: "traefik"
     }
     ...
+
+#And enable persistence in the same block
+persistence:
+  # -- Enable persistence using Persistent Volume Claims
+  # ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  # It can be used to store TLS certificates, see storage in certResolvers
+  enabled: true
+
+#And install traefik
+helm install traefik traefik/traefik --values traefik-values.yaml -n traefik --create-namespace
+
+#U should see something like
+#NOTES:
+#traefik with docker.io/traefik:v3.1.6 has been deployed successfully on traefik namespace !
