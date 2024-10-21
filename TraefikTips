@@ -1,0 +1,6 @@
+#Installing traefik with dashboard
+helm install traefik traefik/traefik \
+  --namespace traefik \
+  --create-namespace \
+  --set dashboard.enabled=true \
+  --set dashboard.domain="dashboard.example.com"
