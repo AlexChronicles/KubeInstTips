@@ -26,3 +26,5 @@ helm install traefik traefik/traefik --values traefik-values.yaml -n traefik --c
 #U should see something like
 #NOTES:
 #traefik with docker.io/traefik:v3.1.6 has been deployed successfully on traefik namespace !
+
+#Next step 2 create PV and PVC for traefik volume
