@@ -1,6 +1,14 @@
 #Installing traefik with dashboard
-helm install traefik traefik/traefik \
-  --namespace traefik \
-  --create-namespace \
-  --set dashboard.enabled=true \
-  --set dashboard.domain="dashboard.example.com"
+#First of all we need to create a values yaml file for configure traefik installation
+helm show values traefik/traefik > traefik-values.yaml
+
+#Find the dashboard block and configure this block
+ingressRoute:
+  dashboard:
+    # -- Create an IngressRoute for the dashboard
+    enabled: true
+    # -- Additional ingressRoute annotations (e.g. for kubernetes.io/ingress.class)
+    annotations: {
+      kubernetes.io/ingress.class: "traefik"
+    }
+    ...
