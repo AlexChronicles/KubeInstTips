@@ -59,3 +59,22 @@ spec:
 kubectl apply -f tr-pv.yaml
 kubectl apply -f tr-pvc.yaml
 
+#Next step is add IngressRoute
+vi traefik-dashboard-ingressroute.yaml
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`dashboard.example.ru`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+
+kubectl create -f traefik-dashboard-ingressroute.yaml
